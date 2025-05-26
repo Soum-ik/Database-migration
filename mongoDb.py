@@ -20,7 +20,6 @@ for collection_name in source_db.list_collection_names():
     # Clear target collection first (optional)
     target_collection.delete_many({})
 
-    # Fetch all documents and insert into target
     docs = list(source_collection.find())
     if docs:
         target_collection.insert_many(docs)
