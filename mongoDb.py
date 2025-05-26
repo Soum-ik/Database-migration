@@ -1,12 +1,12 @@
 from pymongo import MongoClient
 
 # Source DB (Infofarjax on farjaxapps)
-source_uri = "mongodb+srv://infofarjax:y7ySv3LfkCWXXWUh@farjaxapps.he8z4hi.mongodb.net"
+source_uri = "YOUR_SOURCE_MONGODB_URI"
 source_client = MongoClient(source_uri)
 source_db = source_client["Infofarjax"]
 
 # Target DB (fiot_prod_WebApps on New farjazit)
-target_uri = "mongodb+srv://ftciinfraops:eqKFIiNHYlSYh74O@cluster0.dcqj5am.mongodb.net"
+target_uri = "YOUR_TARGET_MONGODB_URI"
 target_client = MongoClient(target_uri)
 target_db = target_client["fiot_prod_WebApps"]
 
