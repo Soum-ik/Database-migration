@@ -1,0 +1,28 @@
+from pymongo import MongoClient
+
+# Source DB (Infofarjax on farjaxapps)
+source_uri = "mongodb+srv://infofarjax:y7ySv3LfkCWXXWUh@farjaxapps.he8z4hi.mongodb.net"
+source_client = MongoClient(source_uri)
+source_db = source_client["Infofarjax"]
+
+# Target DB (fiot_prod_WebApps on New farjazit)
+target_uri = "mongodb+srv://ftciinfraops:eqKFIiNHYlSYh74O@cluster0.dcqj5am.mongodb.net"
+target_client = MongoClient(target_uri)
+target_db = target_client["fiot_prod_WebApps"]
+
+# Clone all collections
+for collection_name in source_db.list_collection_names():
+    source_collection = source_db[collection_name]
+    target_collection = target_db[collection_name]
+
+    print(f"Copying '{collection_name}'...")
+
+    # Clear target collection first (optional)
+    target_collection.delete_many({})
+
+    # Fetch all documents and insert into target
+    docs = list(source_collection.find())
+    if docs:
+        target_collection.insert_many(docs)
+
+print("✅ Database migration completed.")
